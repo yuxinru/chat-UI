@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chat UI</title>
+    <link rel="stylesheet" href="css/chat.css" media="screen" type="text/css" />
+</head>
+<body>
+<div class="content">
+</div>
+<div class="input">
+    <textarea  class="input_text"  maxlength="800"></textarea>
+    <button class="sendbtn" onclick="send()">发送</button>
+</div>
+</body>
+<script src="jquery.js"></script>
+<script>
+    let arr = "";
+    let last = "";
+    let last_time = 0;
+    function send(){
+        let name = "Me";
+        let avatar = "https://github.com/images/modules/logos_page/Octocat.png";
+        let time = Date.parse(new Date());
+        if(time-last_time > 300000){
+            let date = new Date(time);
+            date = getDateTime(date);
+            let html = "<div class='time'><span>"+date+"</span></div>";
+            arr+=html;
+            last_time=time;
+        }
+        if(name !==last) {
+            let html = "<div class='me'>" + "<div><img class='avatar' src=" + avatar + " alt=" + name +
+                "></div><div class='name'>" + name +
+                "</div><div class='message'><div class='right-triangle'></div><span>" + $(".input_text").val() +
+                "</span></div>" +
+                "</div>";
+            arr += html;
+            last = name;
+        }
+        else{
+            let html =  "<div class='me'>" +"<div class='avatar'></div><div class='name'></div>"+
+                "<div class='message'><div class='right-triangle'></div><span>" + $(".input_text").val() +
+                "</span></div>" +
+                "</div>";
+            arr += html;
+            last = name;
+        }
+        $(".input_text").val("");
+        $(".content").html(arr);
+    }
+    function getDateTime(date) {
+        let year = date.getFullYear();
+        let month = date.getMonth() + 1;
+        let day = date.getDate();
+        let hh = date.getHours();
+        let mm = date.getMinutes();
+        let ss = date.getSeconds();
+        return year + "-" + month + "-" + day + " " + hh + ":" + mm + ":" + ss;
+    }
+    window.onload = function(){
+        let url = "chat.json";
+        let request = new XMLHttpRequest();
+        request.open("get",url);
+        request.send(null);  //不发送数据到服务器
+        request.onload = function(){
+            if(request.status === 200){
+                let json = JSON.parse(request.responseText);
+                //console.log(json);
+                for(let user in json){
+                    //console.log(user);
+                    let time = parseInt(json[user].time);
+                    if(time-last_time > 300000){
+                        let date = new Date(time);
+                        date = getDateTime(date);
+                        let html = "<div class='time'><span>"+date+"</span></div>";
+                        arr+=html;
+                        last_time=time;
+                    }
+                    if(json[user].name==="Me"){
+                        //alert(getDateTime(date));
+                        if(json[user].name !==last) {
+                            let html = "<div class='me'>" + "<div><img class='avatar' src=" + json[user].avatar + " alt=" + json[user].name +
+                                "></div><div class='name'>" + json[user].name +
+                                "</div><div class='message'><div class='right-triangle'></div><span>" + json[user].text +
+                                "</span></div>" +
+                                "</div>";
+                            arr += html;
+                            last = json[user].name;
+                        }
+                        else{
+                            let html =  "<div class='me'>" +"<div class='avatar'></div><div class='name'></div>"+
+                                "<div class='message'><div class='right-triangle'></div><span>" + json[user].text +
+                                "</span></div>" +
+                                "</div>";
+                            arr += html;
+                            last = json[user].name;
+                        }
+                    }
+                    else {
+                        if (json[user].name !== last) {
+                            let html = "<div class='other'><div><img class='avatar' src=" + json[user].avatar +
+                                " alt=" + json[user].name + ">" +
+                                "<div><div class='name'>" + json[user].name +
+                                "</div><div class='message'><div class='left-triangle'></div><span>" + json[user].text +
+                                "</span></div></div>";
+                            arr += html;
+                            last = json[user].name;
+                        }
+                        else{
+                            let html = "<div class='other'>" +"<div class='avatar'></div><div class='name'></div>"+
+                                "<div class='message'><div class='left-triangle'></div><span>" + json[user].text +
+                                "</span></div></div>";
+                            arr += html;
+                            last = json[user].name;
+                        }
+                    }
+                }
+                //console.log(arr);
+                $(".content").html(arr);
+            }
+        }
+    }
+</script>
+</html>

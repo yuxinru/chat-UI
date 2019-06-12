@@ -1,0 +1,124 @@
+body{
+    padding: 0;
+    margin: 0;
+    background: -moz-linear-gradient(-45deg, #183850 0, #183850 25%, #192c46 50%, #22254c 75%, #22254c 100%);
+    background: -webkit-linear-gradient(-45deg, #183850 0, #183850 25%, #192c46 50%, #22254c 75%, #22254c 100%);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+.content{
+    margin: 2% 25% 5% 25%;
+    padding: 0 20px 0 0;
+    list-style: none;
+    overflow-y:hidden ;
+    overflow-x: hidden;
+    height:80%;
+}
+.other{
+    clear:both;
+}
+.other .avatar{
+    float:left;
+}
+.other .name{
+    margin: 0 55px 2px 60px;
+    padding: 0;
+    color: #848484;
+    font-size: 80%;
+    text-align: left;
+}
+.other .message{
+    float:left;
+    background-color: white;
+    margin: 0 50px 10px 60px;
+    padding: 0 10px 10px 10px;
+    border-radius:7px;
+    text-indent: 2px;
+}
+.avatar{
+    width:40px;
+    height:40px;
+}
+.me{
+    clear:both;
+}
+.me .avatar{
+    float:right;
+}
+.me .name{
+    margin: 0 50px 2px 60px;
+    padding: 0;
+    color: #848484;
+    font-size: 80%;
+    text-align: right;
+}
+.me .message{
+    float:right;
+    background-color: #b2e281;
+    margin: 0 50px 10px 60px;
+    padding: 10px 10px 10px 10px;
+    border-radius:7px;
+    text-indent: 2px;
+}
+img{
+    height:50px;
+    width:50px;
+}
+.left-triangle{
+    height: 0;
+    width: 0;
+    border-width: 6px;
+    border-style: solid;
+    border-color: transparent white transparent transparent;
+    position: relative;
+    left: -22px;
+    top: 10px;
+}
+.right-triangle{
+    height: 0;
+    width: 0;
+    border-width: 6px;
+    border-style: solid;
+    border-color: transparent transparent transparent #b2e281;
+    position: relative;
+    right:-22px;
+    top:3px;
+    float:right;
+}
+.time{
+    clear: both;
+    font-size: 70%;
+    color: white;
+    text-align: center;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+.time span{
+    background-color: #cecece;
+    line-height: 25px;
+    border-radius: 5px;
+    padding: 5px 10px;
+}
+.input{
+    margin: 10% 25% auto 25%;
+    padding: 0 20px 0 0;
+    display:flex;
+    justify-content: center;
+}
+.input_text{
+    resize: none;
+    margin:0 auto 50px 0;
+    width:70%;
+    height:30px;
+    font-size: 20px;
+    text-align: left;
+}
+.sendbtn{
+    height: 40px;
+    width: 80px;
+    border-radius: 10px;
+    background-color: #b2e281;
+    color: white;
+    font-weight: bold;
+    margin:0 auto 50px 0;
+}
