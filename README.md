@@ -1,7 +1,7 @@
 # chat-UI
 a simple chat UI
 
-1、因为跨域问题，所以文件只有在webstorm中打开才可以看到正确的界面显示。
+1、因为跨域问题，所以文件只有在webstorm中打开才可以看到正确的界面显示，而且用chrome浏览器观看最佳。
 
 2、使用html5+css+jquery实现
 
